@@ -25,7 +25,12 @@ type Project = {
 
 function IconGitHub({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor">
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      fill="currentColor"
+    >
       <path d="M12 .5C5.73.5.75 5.77.75 12.26c0 5.2 3.44 9.6 8.2 11.16.6.12.82-.27.82-.58v-2.1c-3.34.75-4.04-1.66-4.04-1.66-.55-1.43-1.34-1.82-1.34-1.82-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.29 1.86 1.29 1.08 1.9 2.83 1.35 3.52 1.03.11-.8.42-1.35.76-1.66-2.66-.31-5.46-1.37-5.46-6.1 0-1.35.46-2.46 1.22-3.33-.12-.31-.53-1.58.12-3.29 0 0 1.01-.33 3.3 1.27a11.1 11.1 0 0 1 3.01-.42c1.02 0 2.05.14 3.01.42 2.29-1.6 3.3-1.27 3.3-1.27.65 1.71.24 2.98.12 3.29.76.87 1.22 1.98 1.22 3.33 0 4.75-2.8 5.78-5.47 6.09.43.38.82 1.13.82 2.28v3.37c0 .31.22.7.83.58 4.76-1.56 8.2-5.96 8.2-11.16C23.25 5.77 18.27.5 12 .5z" />
     </svg>
   );
@@ -33,7 +38,12 @@ function IconGitHub({ className = "h-5 w-5" }: { className?: string }) {
 
 function IconLinkedIn({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor">
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      fill="currentColor"
+    >
       <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 23.5h4V7.98h-4V23.5zM8 7.98h3.83v2.12h.05c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.2v9.3h-4v-8.25c0-1.97-.04-4.5-2.74-4.5-2.74 0-3.16 2.14-3.16 4.36v8.39H8V7.98z" />
     </svg>
   );
@@ -41,7 +51,12 @@ function IconLinkedIn({ className = "h-5 w-5" }: { className?: string }) {
 
 function IconMail({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor">
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      fill="currentColor"
+    >
       <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z" />
     </svg>
   );
@@ -114,7 +129,15 @@ const PROJECTS: Project[] = [
   },
 ];
 
-function NavLink({ href, label, external }: { href: string; label: string; external?: boolean }) {
+function NavLink({
+  href,
+  label,
+  external,
+}: {
+  href: string;
+  label: string;
+  external?: boolean;
+}) {
   return (
     <a
       href={href}
@@ -148,7 +171,12 @@ function ActionButton({
   if (href) {
     const isExternal = external ?? (href.startsWith("http") || href.startsWith("mailto:"));
     return (
-      <a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noreferrer" : undefined} className={cls}>
+      <a
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noreferrer" : undefined}
+        className={cls}
+      >
         {icon ? <span className="text-white/90">{icon}</span> : null}
         {children}
       </a>
@@ -162,7 +190,15 @@ function ActionButton({
   );
 }
 
-function SocialIconButton({ href, label, icon }: { href: string; label: string; icon: ReactNode }) {
+function SocialIconButton({
+  href,
+  label,
+  icon,
+}: {
+  href: string;
+  label: string;
+  icon: ReactNode;
+}) {
   return (
     <a
       href={href}
@@ -204,7 +240,6 @@ function TagSquare({ children }: { children: ReactNode }) {
 
 export default function Page() {
   const year = useMemo(() => new Date().getFullYear(), []);
-
   const [roleIdx, setRoleIdx] = useState(0);
 
   useEffect(() => {
@@ -335,7 +370,7 @@ export default function Page() {
                 </div>
               </div>
 
-          
+              {/* Social icons */}
               <div className="mt-6 flex items-center gap-3">
                 <SocialIconButton href={LINKS.github} label="GitHub" icon={<IconGitHub />} />
                 <SocialIconButton href={LINKS.linkedin} label="LinkedIn" icon={<IconLinkedIn />} />
@@ -343,18 +378,28 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right image: square + fills */}
+            {/* Right: square image that shows FULL photo (no crop) */}
             <div className="md:col-span-6">
               <div className="relative overflow-hidden rounded-[32px] border border-white/12 bg-white/5 shadow-[0_25px_80px_rgba(0,0,0,0.50)]">
                 <div className="relative w-full aspect-square">
+                  {/* background fill (blurred) */}
+                  <Image
+                    src="/hero.jpg"
+                    alt=""
+                    fill
+                    className="object-cover scale-110 blur-[14px] opacity-[0.55]"
+                  />
+
+                  {/* main image (FULL visible) */}
                   <Image
                     src="/hero.jpg"
                     alt="Shoham hero"
                     fill
                     priority
-                    className="object-cover object-[50%_18%]"
+                    className="object-contain p-6"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/10" />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/10" />
                   <div className="absolute inset-0 ring-1 ring-white/10" />
                 </div>
               </div>
@@ -428,7 +473,6 @@ export default function Page() {
 
                   <p className="mt-3 text-white/95 leading-relaxed">{p.description}</p>
 
-                  {/* Square tags */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {p.tags.map((t) => (
                       <TagSquare key={t}>{t}</TagSquare>
