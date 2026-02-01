@@ -686,18 +686,58 @@ function SkillPill({ s }: { s: Skill }) {
 export default function Page() {
   const year = useMemo(() => new Date().getFullYear(), []);
 
+  // contact form state
   const [name, setName] = useState("");
   const [fromEmail, setFromEmail] = useState("");
   const [message, setMessage] = useState("");
-
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [statusMsg, setStatusMsg] = useState("");
+  // skills filter
   const [skillFilter, setSkillFilter] = useState<SkillCategory>("All");
+async function submitMail() {
+  setStatus("idle");
+  setStatusMsg("");
 
-  function submitMail() {
-    const subject = encodeURIComponent(`Portfolio message from ${name || "Someone"}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${fromEmail}\n\nMessage:\n${message}\n`);
-    window.location.href = `mailto:shoham183@gmail.com?subject=${subject}&body=${body}`;
+  if (!message.trim()) {
+    setStatus("error");
+    setStatusMsg("Please write a message first.");
+    return;
   }
 
+  setSending(true);
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email: fromEmail,
+        message,
+      }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      setStatus("error");
+      setStatusMsg(data?.error || "Failed to send. Please try again.");
+      return;
+    }
+
+    setStatus("success");
+    setStatusMsg("Message sent successfully. Thanks!");
+    setName("");
+    setFromEmail("");
+    setMessage("");
+  } catch {
+    setStatus("error");
+    setStatusMsg("Network error. Please try again.");
+  } finally {
+    setSending(false);
+  }
+}
   const visibleSkills = useMemo(() => {
     if (skillFilter === "All") return SKILLS;
     return SKILLS.filter((s) => s.category === skillFilter);
@@ -943,95 +983,141 @@ export default function Page() {
             ))}
           </div>
         </section>
+{/* CONTACT */}
+<motion.section
+  id="contact"
+  initial={{ opacity: 0, y: 14 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.25 }}
+  transition={{ duration: 0.65, ease: "easeOut" }}
+  className="mt-10"
+>
+  <div className="mb-4 flex items-end justify-between">
+    <h2 className="text-2xl font-semibold">Contact</h2>
+    <span className="text-sm text-white/85">Get in touch</span>
+  </div>
 
-        {/* CONTACT */}
-        <motion.section
-          id="contact"
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
-          className="mt-10"
-        >
-          <div className="mb-4 flex items-end justify-between">
-            <h2 className="text-2xl font-semibold">Contact</h2>
-            <span className="text-sm text-white/85">Get in touch</span>
+  <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
+    {/* Left: contact form */}
+    <div className="md:col-span-7 rounded-[28px] border border-white/12 bg-white/10 p-7 backdrop-blur-xl shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
+      <h3 className="text-xl font-normal">Send a message</h3>
+
+      <div className="mt-6 grid gap-4">
+        {/* Name */}
+        <div className="grid gap-2">
+          <label className="text-xs text-white/70">Name</label>
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (status !== "idle") {
+                setStatus("idle");
+                setStatusMsg("");
+              }
+            }}
+            className="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/90 outline-none focus:border-white/25"
+            placeholder="Your name"
+          />
+        </div>
+
+        {/* Email */}
+        <div className="grid gap-2">
+          <label className="text-xs text-white/70">Email</label>
+          <input
+            value={fromEmail}
+            onChange={(e) => {
+              setFromEmail(e.target.value);
+              if (status !== "idle") {
+                setStatus("idle");
+                setStatusMsg("");
+              }
+            }}
+            className="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/90 outline-none focus:border-white/25"
+            placeholder="your@email.com"
+          />
+        </div>
+
+        {/* Message */}
+        <div className="grid gap-2">
+          <label className="text-xs text-white/70">Message</label>
+          <textarea
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+              if (status !== "idle") {
+                setStatus("idle");
+                setStatusMsg("");
+              }
+            }}
+            className="min-h-[140px] w-full resize-none rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/90 outline-none focus:border-white/25"
+            placeholder="Write your message..."
+          />
+        </div>
+
+        {/* Button */}
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <ActionButton onClick={submitMail} icon={<IconMail />}>
+            {sending ? "Sending..." : "Send message"}
+          </ActionButton>
+        </div>
+
+        {/* Status */}
+        {status !== "idle" ? (
+          <div
+            className={
+              "mt-4 rounded-2xl border p-4 text-sm backdrop-blur " +
+              (status === "success"
+                ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-100"
+                : "border-rose-400/25 bg-rose-400/10 text-rose-100")
+            }
+          >
+            {statusMsg}
           </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-            <div className="md:col-span-7 rounded-[28px] border border-white/12 bg-white/10 p-7 backdrop-blur-xl shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
-              <h3 className="text-xl font-normal">Send a message</h3>
-              <p className="mt-2 text-white/90">This form opens your email client with the message.</p>
-
-              <div className="mt-5 space-y-3">
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
-                  className="w-full rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none focus:border-white/25"
-                />
-                <input
-                  value={fromEmail}
-                  onChange={(e) => setFromEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="w-full rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none focus:border-white/25"
-                />
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Your message"
-                  rows={5}
-                  className="w-full rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none focus:border-white/25"
-                />
-              </div>
-
-              <div className="mt-5">
-                <ActionButton onClick={submitMail} icon={<IconMail />}>
-                  Send Message
-                </ActionButton>
-              </div>
-            </div>
-
-            <div className="md:col-span-5 rounded-[28px] border border-white/12 bg-white/10 p-7 backdrop-blur-xl shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
-              <h3 className="text-xl font-semibold">Get in touch</h3>
-
-              <div className="mt-5 space-y-3">
-                <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
-                  <div className="text-xs text-white/70">Email</div>
-                  <div className="mt-1 flex items-center gap-2 text-white/95">
-                    <IconMail className="h-4 w-4" />
-                    shoham183@gmail.com
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
-                  <div className="text-xs text-white/70">Location</div>
-                  <div className="mt-1 text-white/95">Israel</div>
-                </div>
-
-                <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
-                  <div className="text-xs text-white/70">Links</div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <ActionButton href={LINKS.github} icon={<IconGitHub />} external>
-                      GitHub
-                    </ActionButton>
-                    <ActionButton href={LINKS.linkedin} icon={<IconLinkedIn />} external>
-                      LinkedIn
-                    </ActionButton>
-                    <ActionButton href={LINKS.resume} icon={<IconCV />} external>
-                      CV
-                    </ActionButton>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        <footer className="mt-12 pb-6 text-center text-xs text-white/80">
-          © {year} Shoham Liebermann - Built with Next.js + Tailwind
-        </footer>
+        ) : null}
       </div>
-    </main>
-  );
+    </div>
+
+    {/* Right: details */}
+    <div className="md:col-span-5 rounded-[28px] border border-white/12 bg-white/10 p-7 backdrop-blur-xl shadow-[0_30px_90px_rgba(0,0,0,0.45)]">
+      <h3 className="text-xl font-semibold">Get in touch</h3>
+
+      <div className="mt-5 space-y-3">
+        <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
+          <div className="text-xs text-white/70">Email</div>
+          <div className="mt-1 flex items-center gap-2 text-white/95">
+            <IconMail className="h-4 w-4" />
+            shoham183@gmail.com
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
+          <div className="text-xs text-white/70">Location</div>
+          <div className="mt-1 text-white/95">Israel</div>
+        </div>
+
+        <div className="rounded-2xl border border-white/12 bg-white/10 p-4">
+          <div className="text-xs text-white/70">Links</div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <ActionButton href={LINKS.github} icon={<IconGitHub />} external>
+              GitHub
+            </ActionButton>
+            <ActionButton href={LINKS.linkedin} icon={<IconLinkedIn />} external>
+              LinkedIn
+            </ActionButton>
+            <ActionButton href={LINKS.resume} icon={<IconCV />} external>
+              CV
+            </ActionButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</motion.section>
+
+<footer className="mt-12 pb-6 text-center text-xs text-white/80">
+  © {year} Shoham Liebermann - Built with Next.js + Tailwind
+</footer>
+</div>
+</main>
+);
 }
