@@ -2,8 +2,6 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
     // 1) Server config checks (fail fast)
@@ -17,6 +15,9 @@ export async function POST(req: Request) {
     if (!to || !from) {
       return new Response(JSON.stringify({ error: "Server email configuration is missing" }), { status: 500 });
     }
+
+    // Create Resend ONLY after apiKey exists
+    const resend = new Resend(apiKey);
 
     // 2) Parse body
     const body = await req.json().catch(() => null);
@@ -37,6 +38,7 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify({ error: "Email is required" }), { status: 400 });
     }
 
+    // Real-ish email validation (prevents "חע" etc.)
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(emailStr);
     if (!emailOk) {
       return new Response(JSON.stringify({ error: "Please enter a valid email" }), { status: 400 });
@@ -47,7 +49,7 @@ export async function POST(req: Request) {
     }
 
     // 4) Build email content
-    const subject = `Portfolio message from ${nameStr || "Someone"}`;
+    const subject = `Portfolio message from ${nameStr}`;
 
     const html = `
       <div style="font-family: Arial, sans-serif; line-height:1.6">
@@ -66,12 +68,12 @@ export async function POST(req: Request) {
       from,
       to,
       subject,
-      replyTo: emailStr, // now always valid
+      replyTo: emailStr, // now guaranteed valid
       html,
     });
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
-  } catch (err) {
+  } catch {
     return new Response(JSON.stringify({ error: "Failed to send" }), { status: 500 });
   }
 }
