@@ -1,0 +1,803 @@
+{
+  "metadata": {
+    "projectRoot": "/Users/shoham/Desktop/shoham-portfolio",
+    "url": "http://localhost:3000",
+    "startedAt": "2026-06-24T15:02:43.953Z",
+    "completedAt": "2026-06-24T15:03:16.226Z",
+    "durationMs": 32273,
+    "node": "v25.9.0",
+    "platform": "darwin",
+    "fatalError": null
+  },
+  "stages": [
+    {
+      "code": 0,
+      "signal": null,
+      "label": "Production build",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "durationMs": 8571,
+      "succeeded": true,
+      "outputTail": "\n> shoham-portfolio@0.1.0 build\n> next build\n\n▲ Next.js 16.1.4 (Turbopack)\n- Environments: .env.local\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 2.8s\n  Running TypeScript ...\n  Collecting page data using 11 workers ...\n  Generating static pages using 11 workers (0/5) ...\n  Generating static pages using 11 workers (1/5) \r\n  Generating static pages using 11 workers (2/5) \r\n  Generating static pages using 11 workers (3/5) \r\n✓ Generating static pages using 11 workers (5/5) in 472.8ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/contact\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n\n"
+    },
+    {
+      "code": 0,
+      "signal": null,
+      "label": "ESLint",
+      "command": "npm",
+      "args": [
+        "run",
+        "lint"
+      ],
+      "durationMs": 4527,
+      "succeeded": true,
+      "outputTail": "\n> shoham-portfolio@0.1.0 lint\n> eslint\n\n"
+    },
+    {
+      "code": 0,
+      "signal": null,
+      "label": "TypeScript noEmit",
+      "command": "npx",
+      "args": [
+        "tsc",
+        "--noEmit"
+      ],
+      "durationMs": 2017,
+      "succeeded": true,
+      "outputTail": ""
+    }
+  ],
+  "metrics": {
+    "warnings": [],
+    "runtimeError": null,
+    "performanceScore": 96,
+    "fcp": {
+      "id": "first-contentful-paint",
+      "numericValue": 773.2107000000001,
+      "displayValue": "0.8 s"
+    },
+    "lcp": {
+      "id": "largest-contentful-paint",
+      "numericValue": 2653.0133750000005,
+      "displayValue": "2.7 s"
+    },
+    "tbt": {
+      "id": "total-blocking-time",
+      "numericValue": 111.39464999999996,
+      "displayValue": "110 ms"
+    },
+    "cls": {
+      "id": "cumulative-layout-shift",
+      "numericValue": 0,
+      "displayValue": "0"
+    },
+    "inp": null,
+    "speedIndex": {
+      "id": "speed-index",
+      "numericValue": 1184.9750120559024,
+      "displayValue": "1.2 s"
+    }
+  },
+  "diagnostics": {
+    "longTasks": {
+      "id": "long-tasks",
+      "available": true,
+      "title": "Avoid long main-thread tasks",
+      "score": 1,
+      "scoreDisplayMode": "informative",
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "3 long tasks found",
+      "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)",
+      "warnings": [],
+      "items": [
+        {
+          "url": "http://localhost:3000/_next/static/chunks/773abe17875a49cc.js",
+          "duration": 204,
+          "startTime": 2896.4214000000006
+        },
+        {
+          "url": "Unattributable",
+          "duration": 105,
+          "startTime": 752.60535
+        },
+        {
+          "url": "http://localhost:3000/",
+          "duration": 84,
+          "startTime": 668.60535
+        }
+      ]
+    },
+    "mainThreadWork": {
+      "id": "mainthread-work-breakdown",
+      "available": true,
+      "title": "Minimizes main-thread work",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 855.0719999999993,
+      "numericUnit": "millisecond",
+      "displayValue": "0.9 s",
+      "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+      "warnings": [],
+      "items": [
+        {
+          "group": "scriptEvaluation",
+          "groupLabel": "Script Evaluation",
+          "duration": 335.50399999999973
+        },
+        {
+          "group": "other",
+          "groupLabel": "Other",
+          "duration": 274.2000000000005
+        },
+        {
+          "group": "styleLayout",
+          "groupLabel": "Style & Layout",
+          "duration": 122.33999999999997
+        },
+        {
+          "group": "scriptParseCompile",
+          "groupLabel": "Script Parsing & Compilation",
+          "duration": 59.744
+        },
+        {
+          "group": "paintCompositeRender",
+          "groupLabel": "Rendering",
+          "duration": 41.803999999999064
+        },
+        {
+          "group": "parseHTML",
+          "groupLabel": "Parse HTML & CSS",
+          "duration": 21.479999999999997
+        }
+      ]
+    },
+    "unusedJavaScript": {
+      "id": "unused-javascript",
+      "available": true,
+      "title": "Reduce unused JavaScript",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 300,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 53 KiB",
+      "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+      "warnings": [],
+      "items": [
+        {
+          "url": "http://localhost:3000/_next/static/chunks/773abe17875a49cc.js",
+          "totalBytes": 70168,
+          "wastedBytes": 28914,
+          "wastedPercent": 41.2061689830803
+        },
+        {
+          "url": "http://localhost:3000/_next/static/chunks/fb6efb343d9465e5.js",
+          "totalBytes": 39960,
+          "wastedBytes": 25440,
+          "wastedPercent": 63.664422354872784
+        }
+      ]
+    },
+    "renderBlockingRequests": {
+      "id": "render-blocking-insight",
+      "available": true,
+      "title": "Render-blocking requests",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": "Est savings of 60 ms",
+      "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+      "warnings": [],
+      "items": [
+        {
+          "url": "http://localhost:3000/_next/static/chunks/d21075e41b8eae1d.css",
+          "totalBytes": 8670,
+          "wastedMs": 162
+        }
+      ]
+    },
+    "imageDeliveryIssues": [
+      {
+        "id": "image-delivery-insight",
+        "available": true,
+        "title": "Improve image delivery",
+        "score": 0.5,
+        "scoreDisplayMode": "metricSavings",
+        "numericValue": null,
+        "numericUnit": null,
+        "displayValue": "Est savings of 18 KiB",
+        "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)",
+        "warnings": [],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-1-IMG",
+              "path": "2,HTML,1,BODY,1,MAIN,5,DIV,0,SECTION,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+              "selector": "div.w-full > div.relative > div.relative > img.object-cover",
+              "boundingRect": {
+                "top": 598,
+                "bottom": 1106,
+                "left": 43,
+                "right": 347,
+                "width": 305,
+                "height": 508
+              },
+              "snippet": "<img alt=\"Shoham hero\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover object-[50%_30%] scale-[1.08]\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 768px) 100vw, 600px\" srcset=\"/_next/image?url=%2Fhero.webp&amp;w=640&amp;q=75 640w, /_next/image?url=%2Fhero.we…\" src=\"http://localhost:3000/_next/image?url=%2Fhero.webp&amp;w=828&amp;q=75\">",
+              "nodeLabel": "Shoham hero"
+            },
+            "url": "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=75",
+            "totalBytes": 49730,
+            "wastedBytes": 18012,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "reason": "This image file is larger than it needs to be (744x1242) for its displayed dimensions (627x940). Use responsive images to reduce the image download size.",
+                  "wastedBytes": 18012
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "nonCompositedAnimations": {
+      "id": "non-composited-animations",
+      "available": true,
+      "title": "Avoid non-composited animations",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
+      "numericValue": null,
+      "numericUnit": null,
+      "displayValue": null,
+      "description": "Animations which are not composited can be janky and increase CLS. [Learn how to avoid non-composited animations](https://developer.chrome.com/docs/lighthouse/performance/non-composited-animations/)",
+      "warnings": [],
+      "items": []
+    }
+  },
+  "browser": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "imageErrors": [],
+    "navigationError": null,
+    "responseCount": 16,
+    "documentSummary": {
+      "title": "Shoham Liebermann | Software Engineer",
+      "readyState": "complete",
+      "images": [
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=25",
+          "complete": true,
+          "naturalWidth": 390,
+          "naturalHeight": 585,
+          "loading": "lazy"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=75",
+          "complete": true,
+          "naturalWidth": 390,
+          "naturalHeight": 585,
+          "loading": "auto"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fproject-cobb.webp&w=828&q=75",
+          "complete": true,
+          "naturalWidth": 369,
+          "naturalHeight": 550,
+          "loading": "lazy"
+        },
+        {
+          "src": "http://localhost:3000/_next/image?url=%2Fproject-api.webp&w=828&q=75",
+          "complete": true,
+          "naturalWidth": 369,
+          "naturalHeight": 550,
+          "loading": "lazy"
+        }
+      ],
+      "resources": [
+        {
+          "name": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.29207c2f.woff2",
+          "initiatorType": "link",
+          "duration": 30.700000047683716,
+          "transferSize": 23408,
+          "decodedBodySize": 23108
+        },
+        {
+          "name": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.3b6cae6d.woff2",
+          "initiatorType": "link",
+          "duration": 33.700000047683716,
+          "transferSize": 29588,
+          "decodedBodySize": 29288
+        },
+        {
+          "name": "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=75",
+          "initiatorType": "link",
+          "duration": 265.7000000476837,
+          "transferSize": 50030,
+          "decodedBodySize": 49730
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/d21075e41b8eae1d.css",
+          "initiatorType": "link",
+          "duration": 35,
+          "transferSize": 8587,
+          "decodedBodySize": 42376
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/21a0a4061f3ab64d.js",
+          "initiatorType": "link",
+          "duration": 79.29999995231628,
+          "transferSize": 6476,
+          "decodedBodySize": 18087
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/773abe17875a49cc.js",
+          "initiatorType": "script",
+          "duration": 91.5,
+          "transferSize": 70408,
+          "decodedBodySize": 224413
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/fb6efb343d9465e5.js",
+          "initiatorType": "script",
+          "duration": 86.10000002384186,
+          "transferSize": 40218,
+          "decodedBodySize": 157138
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/turbopack-8664c4d15bbb2ffb.js",
+          "initiatorType": "script",
+          "duration": 81.89999997615814,
+          "transferSize": 4298,
+          "decodedBodySize": 10196
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/ff1a16fafef87110.js",
+          "initiatorType": "script",
+          "duration": 80.5,
+          "transferSize": 582,
+          "decodedBodySize": 282
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/d2be314c3ece3fbe.js",
+          "initiatorType": "script",
+          "duration": 85.69999992847443,
+          "transferSize": 7737,
+          "decodedBodySize": 30681
+        },
+        {
+          "name": "http://localhost:3000/_next/static/chunks/3d39048309f38333.js",
+          "initiatorType": "script",
+          "duration": 87.19999992847443,
+          "transferSize": 11823,
+          "decodedBodySize": 41413
+        },
+        {
+          "name": "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=25",
+          "initiatorType": "img",
+          "duration": 177.5,
+          "transferSize": 26796,
+          "decodedBodySize": 26496
+        },
+        {
+          "name": "http://localhost:3000/favicon.ico?favicon.0b3bf435.ico",
+          "initiatorType": "other",
+          "duration": 21,
+          "transferSize": 26231,
+          "decodedBodySize": 25931
+        },
+        {
+          "name": "http://localhost:3000/_next/image?url=%2Fproject-cobb.webp&w=828&q=75",
+          "initiatorType": "img",
+          "duration": 118.09999990463257,
+          "transferSize": 80056,
+          "decodedBodySize": 79756
+        },
+        {
+          "name": "http://localhost:3000/_next/image?url=%2Fproject-api.webp&w=828&q=75",
+          "initiatorType": "img",
+          "duration": 104.79999995231628,
+          "transferSize": 29150,
+          "decodedBodySize": 28850
+        }
+      ]
+    }
+  },
+  "serverImageErrors": [],
+  "largestChunks": [
+    {
+      "file": ".next/static/chunks/773abe17875a49cc.js",
+      "bytes": 224413,
+      "gzipBytes": 70108,
+      "routes": [
+        "shared runtime",
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/fb6efb343d9465e5.js",
+      "bytes": 157138,
+      "gzipBytes": 39918,
+      "routes": [
+        "shared runtime",
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/a6dad97d9634a72d.js",
+      "bytes": 112594,
+      "gzipBytes": 39627,
+      "routes": [
+        "shared runtime",
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/3d39048309f38333.js",
+      "bytes": 41413,
+      "gzipBytes": 11523,
+      "routes": [
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/d2be314c3ece3fbe.js",
+      "bytes": 30681,
+      "gzipBytes": 7437,
+      "routes": [
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/21a0a4061f3ab64d.js",
+      "bytes": 18087,
+      "gzipBytes": 6176,
+      "routes": [
+        "shared runtime",
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/turbopack-8664c4d15bbb2ffb.js",
+      "bytes": 10196,
+      "gzipBytes": 3998,
+      "routes": [
+        "shared runtime",
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    },
+    {
+      "file": ".next/static/chunks/ff1a16fafef87110.js",
+      "bytes": 282,
+      "gzipBytes": 224,
+      "routes": [
+        "/_global-error",
+        "/_not-found",
+        "/"
+      ]
+    }
+  ],
+  "chunkSearch": {
+    "framer-motion": [],
+    "motion": [
+      {
+        "file": ".next/static/chunks/d21075e41b8eae1d.css",
+        "count": 1,
+        "bytes": 42376,
+        "routes": []
+      }
+    ],
+    "use client": [],
+    "hero.webp": [],
+    "quality": [
+      {
+        "file": ".next/static/chunks/3d39048309f38333.js",
+        "count": 6,
+        "bytes": 41413,
+        "routes": [
+          "/"
+        ]
+      }
+    ],
+    "backdrop-blur": [
+      {
+        "file": ".next/static/chunks/3d39048309f38333.js",
+        "count": 6,
+        "bytes": 41413,
+        "routes": [
+          "/"
+        ]
+      },
+      {
+        "file": ".next/static/chunks/d21075e41b8eae1d.css",
+        "count": 10,
+        "bytes": 42376,
+        "routes": []
+      }
+    ],
+    "blur-": [
+      {
+        "file": ".next/static/chunks/3d39048309f38333.js",
+        "count": 1,
+        "bytes": 41413,
+        "routes": [
+          "/"
+        ]
+      },
+      {
+        "file": ".next/static/chunks/d21075e41b8eae1d.css",
+        "count": 7,
+        "bytes": 42376,
+        "routes": []
+      }
+    ],
+    "background-position": [
+      {
+        "file": ".next/static/chunks/d21075e41b8eae1d.css",
+        "count": 1,
+        "bytes": 42376,
+        "routes": []
+      }
+    ]
+  },
+  "sourceImages": {
+    "findings": [
+      {
+        "severity": "critical",
+        "type": "quality-25",
+        "file": "components/background/page-background.tsx",
+        "line": 18,
+        "src": "{HERO_IMAGE}",
+        "message": "Next Image uses quality={25}; Next 16 rejects qualities not allowed by images.qualities."
+      }
+    ],
+    "priorityImages": [
+      {
+        "file": "components/sections/hero-section.tsx",
+        "line": 40,
+        "src": "{HERO_IMAGE}",
+        "location": "components/sections/hero-section.tsx:40"
+      }
+    ],
+    "sourceMarkers": {
+      "framer-motion": [],
+      "motion": [
+        {
+          "file": "app/globals.css",
+          "line": 87
+        }
+      ],
+      "use client": [
+        {
+          "file": "components/sections/contact-form.tsx",
+          "line": 1
+        },
+        {
+          "file": "components/sections/skills-section.tsx",
+          "line": 1
+        },
+        {
+          "file": "components/ui/action-button.tsx",
+          "line": 1
+        },
+        {
+          "file": "components/ui/skill-chip.tsx",
+          "line": 1
+        }
+      ],
+      "hero.webp": [
+        {
+          "file": "lib/constants.ts",
+          "line": 10
+        }
+      ],
+      "quality": [
+        {
+          "file": "components/background/page-background.tsx",
+          "line": 18
+        }
+      ],
+      "backdrop-blur": [
+        {
+          "file": "components/sections/contact-form.tsx",
+          "line": 155
+        },
+        {
+          "file": "components/sections/projects-section.tsx",
+          "line": 32
+        },
+        {
+          "file": "components/sections/top-nav.tsx",
+          "line": 8
+        },
+        {
+          "file": "components/ui/action-button.tsx",
+          "line": 20
+        },
+        {
+          "file": "components/ui/logo-box.tsx",
+          "line": 34
+        },
+        {
+          "file": "components/ui/nav.tsx",
+          "line": 5
+        },
+        {
+          "file": "components/ui/nav.tsx",
+          "line": 65
+        },
+        {
+          "file": "components/ui/nav.tsx",
+          "line": 74
+        },
+        {
+          "file": "components/ui/nav.tsx",
+          "line": 82
+        },
+        {
+          "file": "components/ui/skill-chip.tsx",
+          "line": 19
+        },
+        {
+          "file": "components/ui/skill-pill.tsx",
+          "line": 9
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 4
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 7
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 13
+        }
+      ],
+      "blur-": [
+        {
+          "file": "components/background/page-background.tsx",
+          "line": 19
+        },
+        {
+          "file": "components/background/page-background.tsx",
+          "line": 30
+        },
+        {
+          "file": "components/background/page-background.tsx",
+          "line": 37
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 4
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 7
+        },
+        {
+          "file": "lib/styles.ts",
+          "line": 13
+        }
+      ],
+      "background-position": [
+        {
+          "file": "app/globals.css",
+          "line": 83
+        }
+      ]
+    },
+    "scannedFileCount": 25
+  },
+  "diagnosis": [
+    {
+      "severity": "critical",
+      "category": "image",
+      "title": "Next Image uses quality={25}; Next 16 rejects qualities not allowed by images.qualities.",
+      "evidence": "components/background/page-background.tsx:18 ({HERO_IMAGE})",
+      "likelyFiles": [
+        "components/background/page-background.tsx"
+      ],
+      "recommendation": "Use an allowed image quality or configure images.qualities in next.config."
+    },
+    {
+      "severity": "high",
+      "category": "metric",
+      "title": "LCP is slow (2.7 s)",
+      "evidence": "LCP exceeds the mobile target of 2.50 s.",
+      "likelyFiles": [],
+      "recommendation": "Reduce critical-path work and bytes; optimize the LCP element and render-blocking resources."
+    },
+    {
+      "severity": "high",
+      "category": "image",
+      "title": "1 Lighthouse image delivery issue(s)",
+      "evidence": "Potential listed savings: 17.6 KiB.",
+      "likelyFiles": [
+        "http://localhost:3000/_next/image?url=%2Fhero.webp&w=828&q=75"
+      ],
+      "recommendation": "Serve correctly sized images, use valid Next Image settings, and avoid oversized background assets."
+    },
+    {
+      "severity": "medium",
+      "category": "javascript",
+      "title": "3 long main-thread task(s)",
+      "evidence": "Combined listed duration: 393 ms.",
+      "likelyFiles": [
+        "http://localhost:3000/_next/static/chunks/773abe17875a49cc.js",
+        "Unattributable",
+        "http://localhost:3000/"
+      ],
+      "recommendation": "Break up work over 50 ms, defer non-critical hydration, and reduce client-side component scope."
+    },
+    {
+      "severity": "medium",
+      "category": "javascript",
+      "title": "53.1 KiB of unused JavaScript",
+      "evidence": "2 script(s) contain potentially removable bytes.",
+      "likelyFiles": [
+        "http://localhost:3000/_next/static/chunks/773abe17875a49cc.js",
+        "http://localhost:3000/_next/static/chunks/fb6efb343d9465e5.js"
+      ],
+      "recommendation": "Move static UI to Server Components, dynamically load optional interactions, and import narrowly."
+    },
+    {
+      "severity": "medium",
+      "category": "rendering",
+      "title": "1 render-blocking request(s)",
+      "evidence": "Est savings of 60 ms",
+      "likelyFiles": [
+        "http://localhost:3000/_next/static/chunks/d21075e41b8eae1d.css"
+      ],
+      "recommendation": "Inline only critical CSS and defer or remove non-critical styles/scripts from the initial path."
+    },
+    {
+      "severity": "medium",
+      "category": "rendering",
+      "title": "Production output contains blur/backdrop/background-position effects",
+      "evidence": "Large blurred layers and background-position animations often increase paint and GPU cost.",
+      "likelyFiles": [
+        ".next/static/chunks/3d39048309f38333.js",
+        ".next/static/chunks/d21075e41b8eae1d.css",
+        "components/sections/contact-form.tsx:155",
+        "components/sections/projects-section.tsx:32",
+        "components/sections/top-nav.tsx:8",
+        "components/ui/action-button.tsx:20",
+        "components/ui/logo-box.tsx:34",
+        "components/ui/nav.tsx:5",
+        "components/ui/nav.tsx:65",
+        "components/ui/nav.tsx:74",
+        "components/ui/nav.tsx:82",
+        "components/ui/skill-chip.tsx:19",
+        "components/ui/skill-pill.tsx:9",
+        "lib/styles.ts:4",
+        "lib/styles.ts:7",
+        "lib/styles.ts:13",
+        "components/background/page-background.tsx:19",
+        "components/background/page-background.tsx:30",
+        "components/background/page-background.tsx:37",
+        "app/globals.css:83"
+      ],
+      "recommendation": "Reduce blurred surface area, avoid animating background-position, and test with effects disabled."
+    }
+  ]
+}
