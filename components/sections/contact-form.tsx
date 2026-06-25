@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconMail } from "@/components/icons";
 import { ActionButton } from "@/components/ui/action-button";
-import { CONTACT_PANEL, INPUT_FIELD } from "@/lib/styles";
+import {
+  CONTACT_PANEL,
+  FORM_MESSAGE_ERROR,
+  FORM_MESSAGE_SUCCESS,
+  INPUT_FIELD,
+} from "@/lib/styles";
+
+const SUCCESS_DISMISS_MS = 7_000;
+const SUCCESS_FADE_MS = 500;
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -12,6 +20,31 @@ export function ContactForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMsg, setStatusMsg] = useState("");
+  const [successFading, setSuccessFading] = useState(false);
+
+  useEffect(() => {
+    if (status !== "success") {
+      setSuccessFading(false);
+      return;
+    }
+
+    setSuccessFading(false);
+
+    const fadeTimer = setTimeout(() => {
+      setSuccessFading(true);
+    }, SUCCESS_DISMISS_MS - SUCCESS_FADE_MS);
+
+    const hideTimer = setTimeout(() => {
+      setStatus("idle");
+      setStatusMsg("");
+      setSuccessFading(false);
+    }, SUCCESS_DISMISS_MS);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [status]);
 
   async function submitMail() {
     setStatus("idle");
@@ -131,11 +164,12 @@ export function ContactForm() {
           {status !== "idle" ? (
             <div
               className={
-                "mt-4 rounded-2xl border p-4 text-sm backdrop-blur " +
-                (status === "success"
-                  ? "border-emerald-400/25 bg-emerald-400/10 text-emerald-100"
-                  : "border-rose-400/25 bg-rose-400/10 text-rose-100")
+                status === "success"
+                  ? `${FORM_MESSAGE_SUCCESS} transition-opacity duration-500 ${successFading ? "opacity-0" : "opacity-100"}`
+                  : FORM_MESSAGE_ERROR
               }
+              role={status === "success" ? "status" : undefined}
+              aria-live={status === "success" ? "polite" : undefined}
             >
               {statusMsg}
             </div>
