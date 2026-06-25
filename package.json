@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "perf:audit": "node scripts/deep-performance-audit.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "next": "16.1.4",
